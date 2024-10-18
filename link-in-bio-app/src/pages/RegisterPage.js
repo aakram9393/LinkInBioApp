@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { supabase } from "../supabaseClient";
 
 function Register() {
   const formik = useFormik({
@@ -21,18 +20,24 @@ function Register() {
     }),
     onSubmit: async (values) => {
       try {
-        const { email, password } = values;
-
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
+        const response = await fetch("http://localhost:5000/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
         });
 
-        if (error) {
-          console.error("Registration error:", error);
-          alert(error.message);
+        const data = await response.json();
+
+        if (!response.ok) {
+          console.error("Registration error:", data);
+          alert(data.message || "Registration failed");
         } else {
-          alert("Registration successful! Please check your email for confirmation.");
+          alert(data.message); // Registration successful message
         }
       } catch (error) {
         console.error("Unexpected error:", error);

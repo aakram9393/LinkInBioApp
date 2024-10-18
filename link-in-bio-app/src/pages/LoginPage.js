@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { supabase } from "../supabaseClient";
 
 function Login() {
   const formik = useFormik({
@@ -15,14 +14,23 @@ function Login() {
     }),
     onSubmit: async (values) => {
       try {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: values.email,
-          password: values.password,
+        // Make a POST request to the backend login API
+        const response = await fetch("http://localhost:5000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
         });
 
-        if (error) {
-          console.error("Login error:", error);
-          alert(error.message);
+        const data = await response.json();
+
+        if (!response.ok) {
+          console.error("Login error:", data);
+          alert(data.message || "Login failed");
         } else {
           alert("Login successful!");
         }
