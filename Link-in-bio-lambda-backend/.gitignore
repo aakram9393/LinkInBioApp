@@ -1,0 +1,67 @@
+# Ignore node_modules directories in all subdirectories
+node_modules/
+
+# Ignore logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore directories for various package managers
+.pnpm-debug.log*
+.cache/
+.pnpm-store/
+.yarn/
+.yarnrc.yml
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignore editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore build folders and files (for various projects)
+dist/
+build/
+out/
+
+# Ignore environment variable files
+.env
+.env.local
+.env.*.local
+
+# Ignore npm package lock files (if using Yarn or other package managers)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore temporary system files
+*.tmp
+*.swp
+*.bak
+*.pid
+*.seed
+*.pid.lock
+
+# Ignore coverage results
+coverage/
+*.lcov
+
+# Ignore misc
+*.log
+*.cache
+*.tmp
+*.temp
